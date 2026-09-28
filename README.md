@@ -1,5 +1,7 @@
 # Ember Lane
 
+**Live:** https://emberlane-restaurant.vercel.app
+
 Sample website for a wood-fired neighbourhood restaurant — dark, appetite-led, with a tabbed menu and table reservations. Built as a portfolio piece to show prospective hospitality clients.
 
 Next.js 16, React 19, Tailwind CSS v4, TypeScript.
