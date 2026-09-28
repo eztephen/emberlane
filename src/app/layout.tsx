@@ -19,7 +19,15 @@ const sourceSerif = Source_Serif_4({
   axes: ["opsz"],
 });
 
+// On Vercel the production URL is provided automatically; set SITE_URL for any other host.
+const siteUrl =
+  process.env.SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: `${SITE.name} | Wood-fired kitchen, Old Quarter`,
   description: SITE.description,
 };
