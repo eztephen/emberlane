@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+/* Committed dark world — a wood-fired room after dark. There is no light theme;
+   every surface paints its colour explicitly so it holds on any browser setting. */
+:root {
+  --char: #14100e;
+  --char-deep: #0d0a09;
+  --smoke: #201a16;
+  --smoke-lift: #2b231e;
+  --ember: #e2703a;
+  --ember-lift: #f08449;
+  --ash: #c9b8a8;
+  --bone: #f4ede5;
+  --olive: #8d8b5c;
+  --line: #3a302a;
+  --line-soft: #2a221d;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-char: var(--char);
+  --color-char-deep: var(--char-deep);
+  --color-smoke: var(--smoke);
+  --color-smoke-lift: var(--smoke-lift);
+  --color-ember: var(--ember);
+  --color-ember-lift: var(--ember-lift);
+  --color-ash: var(--ash);
+  --color-bone: var(--bone);
+  --color-olive: var(--olive);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --font-display: var(--font-bricolage), "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-source-serif), "Iowan Old Style", Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--char);
+  color: var(--bone);
+  font-family: var(--font-source-serif), "Iowan Old Style", Georgia, serif;
+  font-size: 1.0625rem;
+  line-height: 1.62;
+}
+
+:focus-visible {
+  outline: 2.5px solid var(--ember);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@utility site-wrap {
+  width: min(71.25rem, 100% - 2.5rem);
+  margin-inline: auto;
+}
+
+@utility kicker {
+  display: block;
+  font-family: var(--font-bricolage), "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ember);
+}
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1.7rem;
+    border: 1.5px solid transparent;
+    font-family: var(--font-bricolage), "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.18s, color 0.18s, border-color 0.18s;
+  }
+  .btn-ember { background: var(--ember); border-color: var(--ember); color: #1a0f08; }
+  .btn-ember:hover { background: var(--ember-lift); border-color: var(--ember-lift); }
+  .btn-line { background: transparent; border-color: var(--line); color: var(--bone); }
+  .btn-line:hover { border-color: var(--ember); color: var(--ember); }
+
+  /* Hero glow: firelight pooling in the corner of a dark room */
+  .hero-glow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(70% 55% at 76% 28%, rgb(226 112 58 / 0.3) 0%, transparent 62%),
+      radial-gradient(48% 40% at 88% 66%, rgb(184 85 42 / 0.24) 0%, transparent 70%),
+      radial-gradient(60% 50% at 8% 88%, rgb(141 139 92 / 0.13) 0%, transparent 65%);
+  }
+  .hero-glow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgb(244 237 229 / 0.045) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+
+  /* Photo placeholders — replace with next/image once real photography arrives */
+  .plate { position: relative; overflow: hidden; border-radius: 2px; background: var(--smoke); }
+  .plate::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgb(0 0 0 / 0.28) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+  .plate-hearth { background: linear-gradient(168deg, #4a2a17 0%, #8e4a22 42%, #e08b4c 100%); }
+  .plate-greens { background: linear-gradient(150deg, #1e2a1c 0%, #4c5a34 55%, #96a05c 100%); }
+  .plate-coals { background: linear-gradient(150deg, #2e1a14 0%, #6b3220 55%, #c4602f 100%); }
+  .plate-bar { background: linear-gradient(155deg, #241811 0%, #5e3a22 50%, #a96c38 100%); }
+  .plate-moss { background: linear-gradient(155deg, #1a1f1a 0%, #3e4a30 100%); }
+  .plate-brick { background: linear-gradient(155deg, #2a1a16 0%, #7a3e26 100%); }
+  .plate-oak { background: linear-gradient(155deg, #332720 0%, #8a6440 100%); }
+  .plate-dusk { background: linear-gradient(155deg, #1c1614 0%, #4a3a2e 100%); }
+
+  /* Menu leader dots between dish and price */
+  .leader { flex: 1; min-width: 1.5rem; border-bottom: 1px dotted var(--line); transform: translateY(-0.2rem); }
+
+  .menu-panel { animation: menu-in 0.3s ease; }
+}
+
+@keyframes menu-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (width < 40rem) {
+  body { padding-bottom: 3.3rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* Very large screens: scale the whole layout up proportionally instead of leaving a
+   narrow column floating in the middle. Breakpoints are unaffected — media queries
+   measure against the browser's default size, not this one. */
+@media (width >= 1800px) {
+  html { font-size: 112.5%; }
+}
+@media (width >= 2300px) {
+  html { font-size: 125%; }
+}
